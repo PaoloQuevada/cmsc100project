@@ -1,0 +1,80 @@
+ul {
+	list-style-type: none;
+	padding: 10px;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+}
+
+nav li, footer li{
+	overflow: hidden;
+	float: right;
+	margin-right: 5px;
+}
+
+footer {
+	bottom: 0px;
+	position: fixed;
+	right: 0px;
+}
+
+.navbar { 
+    display:block;
+	top:0px;
+	left:0px;
+	right:0px;
+	height:20px;
+	position:fixed;
+	border:2px solid #888;
+	text-align:center;
+	color:#000;
+	background: #90ee90;
+	height: 40px;
+	z-index:3;
+}
+
+#signup {
+	top: 100px;
+	height: 100%;
+	right: 300px;
+	position: fixed;
+}
+
+#login {
+	position: fixed;
+	right: 0px;
+	top: 10px;
+}
+
+#face {
+    position: absolute;
+    left: 25px;
+	top: -13px;
+}
+
+#sidebar1 {
+	height: 100%;
+	position: fixed;
+	padding-top: 20px;
+}
+
+#sidebar2 {
+	top: 40px;
+	height: 100%;
+	right: 0px;
+	position: fixed;
+}
+
+.post {
+	border: 2px solid #000;
+	background: #888;
+	margin-left: 30%;
+	margin-right: 30%;
+	margin-bottom: 10px;
+}
+
+* {
+	font-family: "Calibri";
+}
