@@ -38,6 +38,13 @@ export default class Dashboard extends Component {
 		window.location.replace('http://localhost:3000/profile')
 		
 	}
+	
+	dashboard(e) {
+		e.preventDefault()
+		
+		window.location.replace('http://localhost:3000/dashboard')
+		
+	}
 
   logout(e) {
     e.preventDefault()
@@ -67,6 +74,7 @@ export default class Dashboard extends Component {
 	
 					<ul>
 						<li><button id='logout' onClick={this.logout}>Log Out</button></li>
+						<li><button id='dashboard' onClick={this.dashboard}>Dashboard</button></li>
 						<li><button id='profile' onClick={this.profile}>Profile</button></li>
 					</ul>
 				</nav>

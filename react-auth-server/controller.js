@@ -75,6 +75,45 @@ exports.getInfo = (req, res) => {
 	}
 }
 
+exports.editProfile = (req, res) => { //name, email, password, about, birthday
+	const username = req.body.username
+	const name = req.body.name
+	const email = req.body.email
+	const password = req.body.password
+	const about = req.body.about
+	const birthday = req.body.birthday
+	
+	if(!(name || email || password || about || birthday)){
+		console.log('an oopsie happened, nothing to change to')
+	}else{
+		User.findOne({ name: username}, (err, user) => {
+			console.log(user)
+			if(name){user.name = name}
+			if(email){user.email = email}
+			if(password){user.password = password}
+			if(about){user.about = about}
+			if(birthday){user.birthday = birthday}
+			console.log(user)
+			user.save()
+			return(res.send({success: true}))
+		})
+	}
+}
+
+exports.addPost = (req, res) => {
+	const username = req.body.username
+	const newPost = new Post({
+		author: username,
+		content: req.body.content,
+		date: Date.now
+	})
+
+	newPost.save((err) => {
+		if (err) { return res.send({ success: false})}
+		else { return res.send({ success: true })}
+	})
+}
+
 exports.checkIfLoggedIn = (req, res) => {
 
 	const cookies = req.cookies
