@@ -16,25 +16,38 @@ export default class Profile extends Component {
 		email: null,
 		about: null,
 		birthday: null,
-      isLoggedIn: false,
-      checkedIfLoggedIn: false
+		isLoggedIn: false,
+		checkedIfLoggedIn: false,
+		postArray: []
     }
 	
 	const username = {
-			username: localStorage.getItem('username')
-		}
-		fetch('http://localhost:3001/getInfo', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(username)
+		username: localStorage.getItem('username')
+	}
+	fetch('http://localhost:3001/getInfo', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(username)
+	})
+		.then(response => response.json())
+		.then(body => {
+			console.log(body.email)
+			this.setState({email: body.email, about: body.about, birthday: body.birthday})
 		})
-			.then(response => response.json())
-			.then(body => {
-				console.log(body.email)
-				this.setState({email: body.email, about: body.about, birthday: body.birthday})
-			})
+		
+	fetch('http://localhost:3001/doPostArray', {
+			method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(username)
+	})
+		.then(response => response.json())
+		.then(body => {
+			this.setState({postArray: body.postArray})
+		})
 		
     fetch('http://localhost:3001/checkIfLoggedIn', {
       method: 'POST',
@@ -53,6 +66,7 @@ export default class Profile extends Component {
 
     this.logout = this.logout.bind(this)
 	this.edit = this.edit.bind(this)
+	this.dpa = this.dpa.bind(this)
   }
 
 	profile(e) {
@@ -66,6 +80,15 @@ export default class Profile extends Component {
 		e.preventDefault()
 		
 		window.location.replace('http://localhost:3000/dashboard')
+		
+	}
+	
+	dpa(e) {
+		e.preventDefault()
+		
+		const username = {
+			username: localStorage.getItem('username')
+		}
 		
 	}
 	
@@ -97,6 +120,33 @@ export default class Profile extends Component {
 					alert('sucessfully edited profile')
 				}else{
 					alert('failed to edit profile')
+				}
+			})
+	}
+	
+	editPost(e){
+		e.preventDefault()
+		
+		const currdata = {
+			author: localStorage.getItem('username'),
+			content: document.getElementById('e-content').value
+		}
+		
+		console.log(currdata)
+		
+		fetch ('http://localhost:3001/editPost', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(currdata)
+		})
+			.then(response => response.json())
+			.then(body => {
+				if(!body.sucess){
+					alert('sucessfully edited post')
+				}else{
+					alert('failed to edit post')
 				}
 			})
 	}
@@ -147,6 +197,7 @@ export default class Profile extends Component {
   }
 
   render() {	  
+	const postArray = this.state.postArray
     if (!this.state.checkedIfLoggedIn) {
       return (<div></div>)
     }
@@ -191,6 +242,17 @@ export default class Profile extends Component {
 						<input type="text" id="a-content" placeholder="Write something here" />
 						<button id='addpost' onClick={this.addPost}>Post</button>
 					</div>
+					{[...this.state.postArray].map((post, index) => {
+						return(
+							<div>
+								<h5>{post.author}</h5>
+								{post.content}<br/>
+								{post.timestamp}<br/><br/>
+								<input type="text" id="e-content" placeholder="Edit Content" /> <br/>
+								<button id='editContent' onClick={this.editPost}>Edit</button>
+							</div>
+						)
+					})}
 				</div>
 			</div>
         )  

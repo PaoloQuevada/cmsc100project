@@ -118,6 +118,30 @@ exports.addPost = (req, res) => {
 	})
 }
 
+exports.editPost = (req, res) => {
+	const author = req.body.author
+	const content = req.body.content
+	
+	if(!content){
+		console.log('an oopsie happened, nothing to change to')
+	}else{
+		Post.findOne({ author: author}, (err, post) => {
+			post.content = content
+			post.save()
+			return(res.send({success: true}))
+		})
+	}
+}
+
+exports.doPostArray = (req, res) => {
+	const username = req.body.username
+	var postArray = []
+	console.log(username)
+	Post.find({ author: username }, (err, posts) => {
+		return res.send({ postArray: posts })
+	})
+}
+
 exports.checkIfLoggedIn = (req, res) => {
 
 	const cookies = req.cookies
