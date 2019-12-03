@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 
 // get model registered earlier
 const User = mongoose.model('User')
+const Post = mongoose.model('Post')
 
 exports.signup = (req, res) => {
 
@@ -102,11 +103,14 @@ exports.editProfile = (req, res) => { //name, email, password, about, birthday
 
 exports.addPost = (req, res) => {
 	const username = req.body.username
+	console.log(req.body.date)
 	const newPost = new Post({
 		author: username,
 		content: req.body.content,
-		date: Date.now
+		timestamp: req.body.date
 	})
+	
+	console.log(newPost.author, newPost.content, newPost.timestamp)
 
 	newPost.save((err) => {
 		if (err) { return res.send({ success: false})}
