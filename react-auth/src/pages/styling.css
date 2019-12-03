@@ -86,11 +86,12 @@ footer {
 }
 
 .post {
-	border: 2px solid #000;
-	background: #888;
-	margin-left: 30%;
+	border: 1px solid #000;
+	border-radius: 15px;
+	background: #999999;
 	margin-right: 30%;
 	margin-bottom: 10px;
+	width: 100%;
 }
 
 * {

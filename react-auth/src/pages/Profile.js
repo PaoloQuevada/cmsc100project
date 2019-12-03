@@ -244,7 +244,7 @@ export default class Profile extends Component {
 					</div>
 					{[...this.state.postArray].map((post, index) => {
 						return(
-							<div>
+							<div class='post'>
 								<h5>{post.author}</h5>
 								{post.content}<br/>
 								{post.timestamp}<br/><br/>
