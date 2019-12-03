@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   about: { type: String, required: true},
-  birthday: { type: String, required: true}
+  birthday: { type: String, required: true},
+  friends: {type: [{type: String}], required: false}
 })
 
 UserSchema.methods.comparePassword = function(password, callback) {

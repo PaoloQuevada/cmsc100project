@@ -12,12 +12,13 @@ export default class Profile extends Component {
     super(props)
 
     this.state = {
-		username: localStorage.getItem('username'),
-		email: null,
-		about: null,
-		birthday: null,
+  		username: localStorage.getItem('username'),
+  		email: null,
+  		about: null,
+  		birthday: null,
       isLoggedIn: false,
-      checkedIfLoggedIn: false
+      checkedIfLoggedIn: false,
+      friends: ["No Friends"]
     }
 
 	const username = {
@@ -33,7 +34,20 @@ export default class Profile extends Component {
 			.then(response => response.json())
 			.then(body => {
 				console.log(body.email)
-				this.setState({email: body.email, about: body.about, birthday: body.birthday})
+				this.setState({
+          email: body.email,
+          about: body.about,
+          birthday: body.birthday
+        })
+        if(!body.friends){
+          this.setState({
+            friends: body.friends
+          })
+        }else{
+          this.setState({
+            friends: ["No Friends"]
+          })
+        }
 			})
 
     fetch('http://localhost:3001/checkIfLoggedIn', {
@@ -147,6 +161,8 @@ export default class Profile extends Component {
     else {
 
       if (this.state.isLoggedIn) {
+        var frnds = this.state.friends
+        console.log(frnds)
         return (
 			<div>
 				<nav class="navbar">
@@ -185,6 +201,16 @@ export default class Profile extends Component {
 						<button id='addpost' onClick={this.addPost}>Post</button>
 					</div>
 				</div>
+        <aside id='friendsList'>
+            <ul>
+              {console.log(frnds)}
+              {frnds.map(
+                frnd => {
+                  return <li key = {frnd}>{frnd}</li>
+                }
+              )}
+            </ul>
+        </aside>
 			</div>
         )
       }
