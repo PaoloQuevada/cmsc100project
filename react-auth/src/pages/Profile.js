@@ -104,13 +104,20 @@ export default class Profile extends Component {
 	addPost(e) {
     e.preventDefault()
 
+	var currdate = new Date()
+	currdate = currdate.getFullYear()+'-'+(currdate.getMonth()+1)+'-'+currdate.getDate()+' '+currdate.getHours() + ":" + currdate.getMinutes() + ":" + currdate.getSeconds()
+
+	console.log(currdate)
+
     const newPost = {
 		username: localStorage.getItem('username'),
 		content: document.getElementById('a-content').value,
+		date: currdate
     }
 
+
     fetch('http://localhost:3001/addPost', {
-      method: "POST",
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
