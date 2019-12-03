@@ -8,6 +8,8 @@ mongoose.connect('mongodb://localhost:27017/react-auth', { useNewUrlParser: true
 
 // Register User model
 require('./models/user')
+require('./models/post')
+require('./models/comment')
 
 const app = express()
 app.use(bodyParser.json())

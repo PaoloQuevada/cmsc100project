@@ -105,7 +105,7 @@ export default class Home extends Component {
 						<input type="text" id="s-email" placeholder="Email" /> <br/>
 						<input type="password" id="s-password" placeholder="Password" /> <br/>
 						<input type="text" id="s-about" placeholder="About" /> <br/>
-						<input type="text" id="s-Birthday" placeholder="Birthday" /> <br/>
+						<input type="text" id="s-birthday" placeholder="Birthday" /> <br/>
 
 						<button onClick={this.signup}>Sign Up</button>
 					</form>
