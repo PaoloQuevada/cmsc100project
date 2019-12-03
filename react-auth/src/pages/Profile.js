@@ -168,57 +168,57 @@ export default class Profile extends Component {
     else {
 
       if (this.state.isLoggedIn) {
-        var frnds = this.state.friends
-        console.log(frnds)
+        var frnds = ["me", "myself", "I"]
         return (
-			<div>
-				<nav class="navbar">
-					<a id="face">
-						<h2>face</h2>
-					</a>
+    			<div>
+    				<nav class="navbar">
+    					<a id="face">
+    						<h2>face</h2>
+    					</a>
 
-					<ul>
-						<li><button id='logout' onClick={this.logout}>Log Out</button></li>
-						<li><button id='dashboard' onClick={this.dashboard}>Dashboard</button></li>
-						<li><button id='profile' onClick={this.profile}>Profile</button></li>
-					</ul>
-				</nav>
+    					<ul>
+    						<li><button id='logout' onClick={this.logout}>Log Out</button></li>
+    						<li><button id='dashboard' onClick={this.dashboard}>Dashboard</button></li>
+    						<li><button id='profile' onClick={this.profile}>Profile</button></li>
+    					</ul>
+    				</nav>
 
-				<div id='profiledetails'>
-					<h2>{this.state.username}</h2><br/>
-					Email: {this.state.email} <br/>
-					About: {this.state.about} <br/>
-					Birthday: {this.state.birthday}
-				</div>
+    				<div id='profiledetails'>
+    					<h2>{this.state.username}</h2><br/>
+    					Email: {this.state.email} <br/>
+    					About: {this.state.about} <br/>
+    					Birthday: {this.state.birthday}
+    				</div>
 
-				<div id='editprofile'>
-					<h4>Edit Profile</h4>
-					<input type="text" id="e-name" placeholder="Name" /> <br/>
-					<input type="text" id="e-email" placeholder="Email" /> <br/>
-					<input type="password" id="e-password" placeholder="Password" /> <br/>
-					<input type="text" id="e-about" placeholder="About" /> <br/>
-					<input type="text" id="e-birthday" placeholder="Birthday" /> <br/>
-					<button id='editbutton' onClick={this.edit}>Edit</button>
-				</div>
+    				<div id='editprofile'>
+    					<h4>Edit Profile</h4>
+    					<input type="text" id="e-name" placeholder="Name" /> <br/>
+    					<input type="text" id="e-email" placeholder="Email" /> <br/>
+    					<input type="password" id="e-password" placeholder="Password" /> <br/>
+    					<input type="text" id="e-about" placeholder="About" /> <br/>
+    					<input type="text" id="e-birthday" placeholder="Birthday" /> <br/>
+    					<button id='editbutton' onClick={this.edit}>Edit</button>
+    				</div>
 
-				<div class='postfeed'>
-					<h3>Feed</h3>
-					<div id='addpost'>
-						<input type="text" id="a-content" placeholder="Write something here" />
-						<button id='addpost' onClick={this.addPost}>Post</button>
-					</div>
-				</div>
-        <aside id='friendsList'>
-            <ul>
-              {frnds = this.state.friends}
-              {frnds && frnds.map(
-                frnd => {
-                  return <li key = {frnd}>{frnd}</li>
+    				<div class='postfeed'>
+    					<h3>Feed</h3>
+    					<div id='addpost'>
+    						<input type="text" id="a-content" placeholder="Write something here" />
+    						<button id='addpost' onClick={this.addPost}>Post</button>
+    					</div>
+    				</div>
+            <aside id='friendsList'>
+              <h5>Friends</h5>
+              {[...this.state.friends].map((frnd,ind) => {
+                return(
+                  <aside>
+                    {frnd}
+                  </aside>
+                  )
                 }
               )}
-            </ul>
-        </aside>
-			</div>
+            </aside>
+    			</div>
         )
       }
       else {

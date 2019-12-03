@@ -12,7 +12,8 @@ exports.signup = (req, res) => {
 		email: req.body.email,
 		password: req.body.password,
 		about: req.body.about,
-		birthday: req.body.birthday
+		birthday: req.body.birthday,
+		friends: ["No Friends"]
 	})
 
 	newUser.save((err) => {
@@ -65,7 +66,7 @@ exports.login = (req, res) => {
 
 exports.getInfo = (req, res) => {
 	const username = req.body.username
-	
+
 	if(!username){
 		console.log('an oopsie happened')
 	}else{
@@ -83,7 +84,7 @@ exports.editProfile = (req, res) => { //name, email, password, about, birthday
 	const password = req.body.password
 	const about = req.body.about
 	const birthday = req.body.birthday
-	
+
 	if(!(name || email || password || about || birthday)){
 		console.log('an oopsie happened, nothing to change to')
 	}else{
@@ -109,7 +110,7 @@ exports.addPost = (req, res) => {
 		content: req.body.content,
 		timestamp: req.body.date
 	})
-	
+
 	console.log(newPost.author, newPost.content, newPost.timestamp)
 
 	newPost.save((err) => {
@@ -154,4 +155,3 @@ exports.checkIfLoggedIn = (req, res) => {
 
 	})
 }
-
