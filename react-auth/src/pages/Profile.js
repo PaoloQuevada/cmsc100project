@@ -92,7 +92,8 @@ export default class Profile extends Component {
 		})
 			.then(response => response.json())
 			.then(body => {
-				if(body.sucess){
+				if(!body.sucess){
+					localStorage.setItem('username', body.username)
 					alert('sucessfully edited profile')
 				}else{
 					alert('failed to edit profile')
@@ -178,6 +179,7 @@ export default class Profile extends Component {
 				</div>
 				
 				<div class='postfeed'>
+					<h3>Feed</h3>
 					<div id='addpost'>
 						<input type="text" id="a-content" placeholder="Write something here" />
 						<button id='addpost' onClick={this.addPost}>Post</button>

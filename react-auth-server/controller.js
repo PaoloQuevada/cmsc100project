@@ -95,7 +95,7 @@ exports.editProfile = (req, res) => { //name, email, password, about, birthday
 			if(birthday){user.birthday = birthday}
 			console.log(user)
 			user.save()
-			return(res.send({success: true}))
+			return(res.send({success: true, username: name}))
 		})
 	}
 }
