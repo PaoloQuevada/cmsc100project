@@ -32,6 +32,13 @@ export default class Dashboard extends Component {
     this.logout = this.logout.bind(this)
   }
 
+	profile(e) {
+		e.preventDefault()
+		
+		window.location.replace('http://localhost:3000/profile')
+		
+	}
+
   logout(e) {
     e.preventDefault()
 
@@ -52,11 +59,23 @@ export default class Dashboard extends Component {
 
       if (this.state.isLoggedIn) {
         return (
-          <div>
-            Welcome to the Dashboard, {this.state.username}!
-            <br />
-            <button id='logout' onClick={this.logout}>Log Out</button>
-          </div>
+			<div>
+				<nav class="navbar">
+					<a id="face">
+						<h2>face</h2>
+					</a>
+	
+					<ul>
+						<li><button id='logout' onClick={this.logout}>Log Out</button></li>
+						<li><button id='profile' onClick={this.profile}>Profile</button></li>
+					</ul>
+				</nav>
+			</div>
+          // <div>
+            // Welcome to the Dashboard, {this.state.username}!
+            // <br />
+            // <button id='logout' onClick={this.logout}>Log Out</button>
+          // </div>
         )  
       }
       else {

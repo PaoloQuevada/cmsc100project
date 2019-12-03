@@ -16,7 +16,9 @@ export default class Home extends Component {
     const newUser = {
       name: document.getElementById('s-name').value,
       email: document.getElementById('s-email').value,
-      password: document.getElementById('s-password').value
+      password: document.getElementById('s-password').value,
+	  about: document.getElementById('s-password').value,
+	  birthday: document.getElementById('s-birthday').value
     }
 
     fetch('http://localhost:3001/signup', {
@@ -101,7 +103,9 @@ export default class Home extends Component {
 					<form>
 						<input type="text" id="s-name" placeholder="Name" /> <br/>
 						<input type="text" id="s-email" placeholder="Email" /> <br/>
-						<input type="password" id="s-password" placeholder="password" /> <br/>
+						<input type="password" id="s-password" placeholder="Password" /> <br/>
+						<input type="text" id="s-about" placeholder="About" /> <br/>
+						<input type="text" id="s-Birthday" placeholder="Birthday" /> <br/>
 
 						<button onClick={this.signup}>Sign Up</button>
 					</form>
