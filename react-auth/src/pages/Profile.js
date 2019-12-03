@@ -19,7 +19,7 @@ export default class Profile extends Component {
       isLoggedIn: false,
       checkedIfLoggedIn: false
     }
-	
+
 	const username = {
 			username: localStorage.getItem('username')
 		}
@@ -35,7 +35,7 @@ export default class Profile extends Component {
 				console.log(body.email)
 				this.setState({email: body.email, about: body.about, birthday: body.birthday})
 			})
-		
+
     fetch('http://localhost:3001/checkIfLoggedIn', {
       method: 'POST',
       credentials: 'include'
@@ -57,21 +57,21 @@ export default class Profile extends Component {
 
 	profile(e) {
 		e.preventDefault()
-		
+
 		window.location.replace('http://localhost:3000/profile')
-		
+
 	}
-	
+
 	dashboard(e) {
 		e.preventDefault()
-		
+
 		window.location.replace('http://localhost:3000/dashboard')
-		
+
 	}
-	
+
 	edit(e) {
 		e.preventDefault()
-		
+
 		const currdata = {
 			username: localStorage.getItem('username'),
 			name: document.getElementById('e-name').value,
@@ -80,9 +80,9 @@ export default class Profile extends Component {
 			about: document.getElementById('e-about').value,
 			birthday: document.getElementById('e-birthday').value
 		}
-		
+
 		console.log(currdata)
-		
+
 		fetch ('http://localhost:3001/editprofile', {
 			method: 'POST',
 			headers: {
@@ -99,7 +99,7 @@ export default class Profile extends Component {
 				}
 			})
 	}
-	
+
 	addPost(e) {
     e.preventDefault()
 
@@ -138,7 +138,7 @@ export default class Profile extends Component {
     this.setState({ isLoggedIn: false })
   }
 
-  render() {	  
+  render() {
     if (!this.state.checkedIfLoggedIn) {
       return (<div></div>)
     }
@@ -152,22 +152,22 @@ export default class Profile extends Component {
 					<a id="face">
 						<h2>face</h2>
 					</a>
-					
+
 					<ul>
 						<li><button id='logout' onClick={this.logout}>Log Out</button></li>
 						<li><button id='dashboard' onClick={this.dashboard}>Dashboard</button></li>
 						<li><button id='profile' onClick={this.profile}>Profile</button></li>
 					</ul>
 				</nav>
-				
+
 				<div id='profiledetails'>
 					<h2>{this.state.username}</h2><br/>
 					Email: {this.state.email} <br/>
 					About: {this.state.about} <br/>
-					Birthday: {this.state.birthday}	
+					Birthday: {this.state.birthday}
 				</div>
-				
-				<div id='editprofile'> 
+
+				<div id='editprofile'>
 					<h4>Edit Profile</h4>
 					<input type="text" id="e-name" placeholder="Name" /> <br/>
 					<input type="text" id="e-email" placeholder="Email" /> <br/>
@@ -176,7 +176,7 @@ export default class Profile extends Component {
 					<input type="text" id="e-birthday" placeholder="Birthday" /> <br/>
 					<button id='editbutton' onClick={this.edit}>Edit</button>
 				</div>
-				
+
 				<div class='postfeed'>
 					<div id='addpost'>
 						<input type="text" id="a-content" placeholder="Write something here" />
@@ -184,7 +184,7 @@ export default class Profile extends Component {
 					</div>
 				</div>
 			</div>
-        )  
+        )
       }
       else {
         return <Redirect to="/" />
@@ -192,7 +192,7 @@ export default class Profile extends Component {
 
     }
 
-    
-    
+
+
   }
 }
