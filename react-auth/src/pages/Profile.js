@@ -18,7 +18,7 @@ export default class Profile extends Component {
   		birthday: null,
       isLoggedIn: false,
       checkedIfLoggedIn: false,
-      friends: ["No Friends"]
+      friends: []
     }
 
 	const username = {
@@ -210,8 +210,8 @@ export default class Profile extends Component {
 				</div>
         <aside id='friendsList'>
             <ul>
-              {console.log(frnds)}
-              {frnds.map(
+              {frnds = this.state.friends}
+              {frnds && frnds.map(
                 frnd => {
                   return <li key = {frnd}>{frnd}</li>
                 }
