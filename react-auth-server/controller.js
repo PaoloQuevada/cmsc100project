@@ -65,10 +65,14 @@ exports.login = (req, res) => {
 exports.getInfo = (req, res) => {
 	const username = req.body.username
 	
-	User.findOne({ name: username }, (err, user) => {
-		console.log(user)
-		return res.send({email: user.email, about: user.about, birthday: user.birthday})
-	})
+	if(!username){
+		console.log('an oopsie happened')
+	}else{
+		User.findOne({ name: username }, (err, user) => {
+			console.log(user)
+			return res.send({email: user.email, about: user.about, birthday: user.birthday})
+		})
+	}
 }
 
 exports.checkIfLoggedIn = (req, res) => {
