@@ -62,6 +62,15 @@ exports.login = (req, res) => {
 
 }
 
+exports.getInfo = (req, res) => {
+	const username = req.body.username
+	
+	User.findOne({ name: username }, (err, user) => {
+		console.log(user)
+		return res.send({email: user.email, about: user.about, birthday: user.birthday})
+	})
+}
+
 exports.checkIfLoggedIn = (req, res) => {
 
 	const cookies = req.cookies

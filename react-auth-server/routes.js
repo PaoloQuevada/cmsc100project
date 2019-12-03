@@ -10,7 +10,7 @@ module.exports = (app) => {
   app.post('/signup', controller.signup)
   app.post('/login', controller.login)
 
-
+  app.post('/getInfo', controller.getInfo)
   app.post('/checkIfLoggedIn', controller.checkIfLoggedIn)
 
 }

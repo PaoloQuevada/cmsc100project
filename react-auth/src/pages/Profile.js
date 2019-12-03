@@ -3,6 +3,9 @@ import { Redirect } from 'react-router-dom'
 import Cookies from 'universal-cookie';
 import CSS from './styling.css';
 
+//const mongoose = require('mongoose')
+//const User = mongoose.model('User')
+
 export default class Profile extends Component {
 
   constructor(props) {
@@ -10,12 +13,29 @@ export default class Profile extends Component {
 
     this.state = {
 		username: localStorage.getItem('username'),
-		about: localStorage.getItem('about'),
-		birthday: localStorage.getItem('birthday'),
+		email: null,
+		about: null,
+		birthday: null,
       isLoggedIn: false,
       checkedIfLoggedIn: false
     }
-
+	
+	const username = {
+			username: localStorage.getItem('username')
+		}
+		fetch('http://localhost:3001/getInfo', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(username)
+		})
+			.then(response => response.json())
+			.then(body => {
+				console.log(body.email)
+				this.setState({email: body.email, about: body.about, birthday: body.birthday})
+			})
+		
     fetch('http://localhost:3001/checkIfLoggedIn', {
       method: 'POST',
       credentials: 'include'
@@ -40,6 +60,7 @@ export default class Profile extends Component {
 		window.location.replace('http://localhost:3000/profile')
 		
 	}
+
 
   logout(e) {
     e.preventDefault()
@@ -71,9 +92,15 @@ export default class Profile extends Component {
 						<li><button id='logout' onClick={this.logout}>Log Out</button></li>
 						<li><button id='profile' onClick={this.profile}>Profile</button></li>
 					</ul>
-					
-					
 				</nav>
+				
+				<div id='profiledetails'>
+					<h2>{this.state.username}</h2><br/>
+					Email: {this.state.email} <br/>
+					About: {this.state.about} <br/>
+					Birthday: {this.state.birthday}
+				</div>
+				
 			</div>
           // <div>
             // Welcome to the Dashboard, {this.state.username}!
