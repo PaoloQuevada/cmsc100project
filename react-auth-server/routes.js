@@ -13,6 +13,7 @@ module.exports = (app) => {
   app.post('/editProfile', controller.editProfile)
   app.post('/editPost', controller.editPost)
   app.post('/addPost', controller.addPost)
+  app.post('/deletePost', controller.addPost)
   app.post('/doPostArray', controller.doPostArray)
   app.post('/checkIfLoggedIn', controller.checkIfLoggedIn)
 

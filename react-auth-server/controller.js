@@ -133,6 +133,20 @@ exports.editPost = (req, res) => {
 	}
 }
 
+exports.deletePost = (req, res) => {
+	const author = req.body.author
+	const id = req.body._id
+	
+	if(!author){
+		console.log('an oopsie happened, nothing to delete')
+	}else{
+		Post.deleteOne(id, (err, post) =>{
+			if (err){return(res.send({success: false}))}
+			else{return(res.send({success: true}))}
+		})
+	}
+}
+
 exports.doPostArray = (req, res) => {
 	const username = req.body.username
 	var postArray = []

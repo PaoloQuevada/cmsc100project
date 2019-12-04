@@ -67,6 +67,7 @@ export default class Profile extends Component {
     this.logout = this.logout.bind(this)
 	this.edit = this.edit.bind(this)
 	this.dpa = this.dpa.bind(this)
+	this.deletePost = this.deletePost.bind(this)
   }
 
 	profile(e) {
@@ -147,6 +148,33 @@ export default class Profile extends Component {
 					alert('sucessfully edited post')
 				}else{
 					alert('failed to edit post')
+				}
+			})
+	}
+	
+	deletePost(e){
+		e.preventDefault()
+		
+		const currdata = {
+			author: localStorage.getItem('username'),
+			id: document.getElementById('deletePost').value
+		}
+		
+		console.log(currdata)
+		
+		fetch ('http://localhost:3001/deletePost', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(currdata)
+		})
+			.then(response => response.json())
+			.then(body => {
+				if(!body.sucess){
+					alert('sucessfully deleted post')
+				}else{
+					alert('failed to deleted post')
 				}
 			})
 	}
@@ -250,6 +278,7 @@ export default class Profile extends Component {
 								{post.timestamp}<br/><br/>
 								<input type="text" id="e-content" placeholder="Edit Content" /> <br/>
 								<button id='editContent' onClick={this.editPost}>Edit</button>
+								<button id='deletePost' value={post._id} onClick={this.deletePost}>Delete Post</button>
 							</div>
 						)
 					})}
